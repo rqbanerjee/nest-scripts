@@ -1,0 +1,10 @@
+Rajat Banerjee
+http://github.com/rqbanerjee
+
+
+Requirements:
+- Tested with Ruby 2.1.1
+- rvm -- http://rvm.io
+- httparty - gem install httparty
+- Nest developer account. NEST_ID and NEST_SECRET from https://developer.nest.com/products
+

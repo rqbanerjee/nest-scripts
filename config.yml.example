@@ -1,0 +1,3 @@
+NEST_ID: 54cf32d8-BLAHBLAHBLAH
+NEST_SECRET: YOUR_SECRET_HERE
+NEST_PIN: <GET IT FROM https://home.nest.com/login/oauth2?response_type=code& .... from your app page>
