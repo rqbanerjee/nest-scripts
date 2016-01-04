@@ -22,4 +22,5 @@ puts "Getting access token..."
 nest_client.get_access_token
 
 puts "Getting devices"
-nest_client.get_devices
+thermostats = nest_client.get_devices
+thermostats.each {|t| puts t.inspect}

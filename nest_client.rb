@@ -1,5 +1,6 @@
 require 'net/http'
 require 'httparty'
+require_relative 'nest_device'
 
 class NestClient
   include HTTParty
@@ -37,17 +38,24 @@ class NestClient
   end
 
   def get_devices
+    thermostats = []
     if @access_token.nil?
       get_access_token
     end
 
     url = "https://developer-api.nest.com/devices?auth=#{@access_token}"
     options = {"Authorization" => "Bearer #{@access_token}" }
-    #options = {"auth" => @access_token}
-    #puts options
     resp = HTTParty.get(url, body: options)
-    #puts "curl -v -L -H \"Authorization: Bearer #{@access_token}\" -X GET \"https://developer-api.nest.com/devices\" "
-    puts resp.parsed_response
+    if resp.code != 200
+      puts "Failed to retrieve devices. Error: #{resp.parsed_response["error_description"] } "
+      return []
+    end
+
+    parsed = resp.parsed_response
+    thermostats_hash = parsed["thermostats"]
+    puts "Retrieved #{thermostats_hash.keys.size} thermostats"
+    thermostats_hash.each {|name, properties| thermostats << NestDevice.new(name, properties) }
+    thermostats
   end
 
   def to_s
