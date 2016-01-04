@@ -41,12 +41,12 @@ class NestClient
       get_access_token
     end
 
-    url = 'https://developer-api.nest.com/devices'
-    #options = {"Authorization" => "Bearer #{@access_token}" }
-    options = {"auth" => @access_token}
-    puts options
+    url = "https://developer-api.nest.com/devices?auth=#{@access_token}"
+    options = {"Authorization" => "Bearer #{@access_token}" }
+    #options = {"auth" => @access_token}
+    #puts options
     resp = HTTParty.get(url, body: options)
-    
+    #puts "curl -v -L -H \"Authorization: Bearer #{@access_token}\" -X GET \"https://developer-api.nest.com/devices\" "
     puts resp.parsed_response
   end
 
