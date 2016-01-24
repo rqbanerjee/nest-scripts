@@ -14,7 +14,10 @@ if nest_config.nest_token.nil?
 else
     puts "Getting devices"
     thermostats = nest_client.get_devices
-    thermostats.each {|t| puts t.inspect}
+    thermostats.each do |t|
+        puts "Details for thermostat #{t.id} ( #{t.name} )"
+        pp t
+    end
 end
 
 exit 0 #success
