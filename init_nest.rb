@@ -1,26 +1,20 @@
 require 'yaml'
-require_relative 'nest_client'
+require_relative 'lib/nest_client'
+require_relative 'lib/nest_config'
 
-def load_config_file(file_name)
-  config_vals = nil
-  begin
-    config_vals = YAML.load_file(file_name)
-  rescue Exception => e
-    puts "UNABLE TO LOAD #{file_name}: #{e}."
-    exit -1
-  end
-  config_vals
-end
+nest_config = NestConfig.new("config.yml")
+nest_client = NestClient.new(nest_config)
 
-config_vals = load_config_file("config.yml")
-nest_client = NestClient.new(config_vals["NEST_ID"], config_vals["NEST_SECRET"], config_vals["NEST_PIN"])
-
-puts "TEST:"
+puts "NEST_CLIENT:"
 puts nest_client.inspect
 
-puts "Getting access token..."
-nest_client.get_access_token
+if nest_config.nest_token.nil?
+    puts "No valid access token could be created. Quitting."
+    exit -1
+else
+    puts "Getting devices"
+    thermostats = nest_client.get_devices
+    thermostats.each {|t| puts t.inspect}
+end
 
-puts "Getting devices"
-thermostats = nest_client.get_devices
-thermostats.each {|t| puts t.inspect}
+exit 0 #success
