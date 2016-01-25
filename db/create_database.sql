@@ -7,15 +7,14 @@ create table if not exists nest_thermostat_readings (
     humidity int unsigned not null,
     has_leaf bool not null,
     name varchar(255) not null,
-    hvac_mode varchar(10) nut null,
-    hvac_state varchar(10) not null,
-    target_temperature float not null,
-    ambient_temperature float not null,
+    hvac_mode varchar(10),
+    hvac_state varchar(10),
+    target_temperature float default 0,
+    ambient_temperature float default 0,
     reading_time varchar(24) not null,
 
-    timestamp not null default reading_timestamp on update reading_timestamp
-            comment 'The time at which this reading was inserted',
-);
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+        comment 'The time at which this reading was inserted');
 
 /*
    @id

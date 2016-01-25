@@ -8,3 +8,17 @@ Requirements:
 - httparty - gem install httparty
 - Nest developer account. NEST_ID and NEST_SECRET from https://developer.nest.com/products
 
+
+Installation
+gem install httparty
+
+Database setup
+- Use a MYSQL RDS host, t2.small will do it
+- Log in on the command line as the 'master user' you set while setting it up. 'root' is prohibited so don't try that.
+- CREATE DATABASE thermo;
+- GRANT ALL ON thermo.* TO '<YOUR MASTER USER>'@'localhost';
+- CREATE USER 'nestwriter'@'localhost' IDENTIFIED BY '<GENERATE A PASSWORD FOR NEST USER AND PUT IT IN YOUR CONFIG>';
+- GRANT INSERT ON thermo.* TO 'nestwriter'@'localhost';
+
+Create the db
+mysql -h <YOUR RDS HOST>.us-east-1.rds.amazonaws.com -P 3306 -u <YOUR MASTER USER> -p  thermo < db/create_database.sql 

@@ -7,8 +7,11 @@ class NestConfig
     @nest_pin
     @nest_token
     @nest_token_expiry
+    @db_host
+    @db_user
+    @db_password
 
-    attr_accessor :nest_id, :nest_secret, :nest_pin, :nest_token
+    attr_accessor :nest_id, :nest_secret, :nest_pin, :nest_token, :db_host, :db_user, :db_password
 
     def initialize(file_name)
         @file_name = file_name
@@ -24,6 +27,9 @@ class NestConfig
             puts "No token found in config file. Trying to get one"
             set_nest_token(get_access_token)
         end
+        @db_host = config_vals["DB_HOST"]
+        @db_user = config_vals["DB_USER"]
+        @db_password = config_vals["DB_PASSWORD"]
     end
 
     def load_config_file(file_name)
@@ -69,7 +75,10 @@ class NestConfig
             "NEST_SECRET" => @nest_secret,
             "NEST_PIN" => @nest_pin,
             "NEST_TOKEN" => @nest_token,
-            "NEST_TOKEN_EXPIRY" => @nest_token_expiry
+            "NEST_TOKEN_EXPIRY" => @nest_token_expiry,
+            "DB_HOST" => @db_host,
+            "DB_USER" => @db_user,
+            "DB_PASSWORD" => @db_password
         }
         File.open(@file_name, 'w+') {|f| f.write(config_vals.to_yaml) }
         puts "wrote config values to #{@file_name}."

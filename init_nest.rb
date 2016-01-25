@@ -4,6 +4,7 @@ require_relative 'lib/nest_config'
 
 nest_config = NestConfig.new("config.yml")
 nest_client = NestClient.new(nest_config)
+thermostats = []
 
 puts "NEST_CLIENT:"
 puts nest_client.inspect
@@ -18,6 +19,15 @@ else
         puts "Details for thermostat #{t.id} ( #{t.name} )"
         pp t
     end
+
 end
+
+begin
+    require_relative 'lib/db_writer'
+    db_writer = DbWriter.new(nest_config)
+rescue Gem::LoadError, Exception
+    puts "****\n Not going attempting to connect to mysql since mysql gem is not installed \n****"
+end
+
 
 exit 0 #success
