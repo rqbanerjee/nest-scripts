@@ -30,5 +30,5 @@ rescue Gem::LoadError => e
 	puts e
 end
 
-
+db_writer.store_readings(thermostats)
 exit 0 #success

@@ -4,6 +4,7 @@
 
 create table if not exists nest_thermostat_readings (
     id int unsigned auto_increment not null primary key,
+    uid varchar(255) not null comment 'NEST assigned unique id',
     humidity int unsigned not null,
     has_leaf bool not null,
     name varchar(255) not null,
