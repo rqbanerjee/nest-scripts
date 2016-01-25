@@ -12,6 +12,10 @@ Requirements:
 Installation
 gem install httparty
 
+To run from an EC2 instance on Amazon Linux:
+sudo yum install mysql-devel build-essential bison openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev autoconf libc6-dev ncurses-dev automake libtool
+sudo gem install mysql2
+
 Database setup
 - Use a MYSQL RDS host, t2.small will do it
 - Log in on the command line as the 'master user' you set while setting it up. 'root' is prohibited so don't try that.
