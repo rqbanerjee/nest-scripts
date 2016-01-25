@@ -37,3 +37,6 @@ build/
 #ignore my config file with my own personal values in it
 config.yml
 
+db/connection_notes.txt
+
+
