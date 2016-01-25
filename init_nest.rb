@@ -25,7 +25,7 @@ end
 begin
     require_relative 'lib/db_writer'
     db_writer = DbWriter.new(nest_config)
-rescue Gem::LoadError, Exception => e
+rescue Gem::LoadError => e
     puts "****\n Not going attempting to connect to mysql since mysql2 gem is not installed \n****"
 	puts e
 end
