@@ -17,8 +17,8 @@ class DbWriter
 
 		begin
 			@conn = Mysql.new @db_host, @db_user, @db_password
-			puts con.get_server_info
-    			rs = con.query 'SELECT VERSION()'
+			puts @conn.get_server_info
+    			rs = @conn.query 'SELECT * FROM nest_thermostat_readings'
     			puts rs.fetch_row    
 		rescue Mysql::Error => e
     			puts e.errno
